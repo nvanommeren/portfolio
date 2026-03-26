@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Nikki van Ommeren</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md);
+            background-image: url('assets/library.webp');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .login-page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(250, 249, 247, 0.88);
+            z-index: 1;
+        }
+        .login-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 400px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: var(--space-lg);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+        .login-header { text-align: center; margin-bottom: var(--space-lg); }
+        .login-logo { font-family: var(--font-display); font-size: 2rem; color: var(--color-accent); margin-bottom: var(--space-xs); }
+        .login-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; margin-bottom: var(--space-xs); }
+        .login-subtitle { font-size: 0.9rem; color: var(--color-text-muted); }
+        .form-group { margin-bottom: var(--space-md); }
+        .form-label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-muted); margin-bottom: var(--space-xs); }
+        .form-input { width: 100%; padding: 0.875rem 1rem; font-family: var(--font-body); font-size: 1rem; color: var(--color-text); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 2px; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+        .form-input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(196, 93, 58, 0.1); }
+        .login-btn { width: 100%; padding: 1rem; background: var(--color-accent); color: var(--color-bg); font-family: var(--font-body); font-size: 0.875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; border: none; border-radius: 2px; cursor: pointer; transition: all 0.2s ease; }
+        .login-btn:hover { background: #A84D2E; transform: translateY(-2px); }
+        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .form-footer { margin-top: var(--space-md); text-align: center; }
+        .form-link { font-size: 0.875rem; color: var(--color-text-muted); }
+        .form-link:hover { color: var(--color-accent); }
+        .form-divider { display: flex; align-items: center; margin: var(--space-md) 0; color: var(--color-text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .form-divider::before, .form-divider::after { content: ''; flex: 1; height: 1px; background: var(--color-border); }
+        .form-divider span { padding: 0 1rem; }
+        .message { padding: 1rem; border-radius: 2px; font-size: 0.875rem; margin-bottom: var(--space-md); display: none; }
+        .message.show { display: block; }
+        .message.error { background: #FEE2E2; border: 1px solid #FECACA; color: #B91C1C; }
+        .message.success { background: #D1FAE5; border: 1px solid #A7F3D0; color: #065F46; }
+        .tabs { display: flex; margin-bottom: var(--space-md); border-bottom: 1px solid var(--color-border); }
+        .tab { flex: 1; padding: 1rem; text-align: center; font-size: 0.875rem; font-weight: 500; color: var(--color-text-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s ease; }
+        .tab:hover { color: var(--color-text); }
+        .tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+
+    <main class="login-page">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="login-logo">NvO</div>
+                <h1 class="login-title">Welcome</h1>
+                <p class="login-subtitle">Sign in or create an account</p>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="login">Sign In</div>
+                <div class="tab" data-tab="register">Register</div>
+            </div>
+
+            <form id="loginForm" class="tab-content active">
+                <div class="form-group">
+                    <label class="form-label" for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="login-btn">Sign In</button>
+            </form>
+
+            <form id="registerForm" class="tab-content">
+                <div class="form-group">
+                    <label class="form-label" for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" class="form-input" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" class="form-input" placeholder="Min. 6 characters" required minlength="6">
+                </div>
+                <button type="submit" class="login-btn">Create Account</button>
+            </form>
+
+            <div class="form-divider"><span>or</span></div>
+            <div class="form-footer">
+                <a href="index.html" class="form-link">← Back to portfolio</a>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { firebaseConfig } from "./firebase-config.js";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab + 'Form').classList.add('active');
+                hideMessage();
+            });
+        });
+
+        const messageEl = document.getElementById('message');
+        function showMessage(text, type) {
+            messageEl.textContent = text;
+            messageEl.className = `message show ${type}`;
+        }
+        function hideMessage() { messageEl.className = 'message'; }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const btn = e.target.querySelector('button');
+            btn.disabled = true;
+            btn.textContent = 'Signing in...';
+            hideMessage();
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                showMessage('Login successful! Redirecting...', 'success');
+                setTimeout(() => window.location.href = 'index.html', 1500);
+            } catch (error) {
+                showMessage(getErrorMessage(error.code), 'error');
+                btn.disabled = false;
+                btn.textContent = 'Sign In';
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const btn = e.target.querySelector('button');
+            btn.disabled = true;
+            btn.textContent = 'Creating account...';
+            hideMessage();
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                showMessage('Account created! Redirecting...', 'success');
+                setTimeout(() => window.location.href = 'index.html', 1500);
+            } catch (error) {
+                showMessage(getErrorMessage(error.code), 'error');
+                btn.disabled = false;
+                btn.textContent = 'Create Account';
+            }
+        });
+
+        function getErrorMessage(code) {
+            const messages = {
+                'auth/invalid-email': 'Invalid email address.',
+                'auth/user-disabled': 'This account has been disabled.',
+                'auth/user-not-found': 'No account found with this email.',
+                'auth/wrong-password': 'Incorrect password.',
+                'auth/email-already-in-use': 'An account with this email already exists.',
+                'auth/weak-password': 'Password must be at least 6 characters.',
+                'auth/invalid-credential': 'Invalid email or password.'
+            };
+            return messages[code] || 'An error occurred. Please try again.';
+        }
+    </script>
+</body>
+</html>

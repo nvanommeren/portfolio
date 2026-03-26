@@ -8,6 +8,59 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .auth-required { display: none; }
+        .auth-required.visible { display: block; }
+        .login-prompt {
+            padding: var(--space-xl) var(--space-md);
+            text-align: center;
+            background: var(--color-bg-alt);
+        }
+        .login-prompt.hidden { display: none; }
+        .login-prompt-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: var(--space-sm);
+        }
+        .login-prompt-text {
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-md);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .login-prompt-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-accent);
+            color: var(--color-bg);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 2px;
+            transition: all 0.2s ease;
+        }
+        .login-prompt-btn:hover {
+            background: #A84D2E;
+            transform: translateY(-2px);
+        }
+        .nav-auth { display: flex; align-items: center; gap: var(--space-sm); }
+        .nav-user { font-size: 0.875rem; color: rgba(250, 249, 247, 0.8); }
+        .nav-logout {
+            font-size: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            background: rgba(255,255,255,0.15);
+            border-radius: 2px;
+            color: var(--color-bg);
+            transition: background 0.2s ease;
+        }
+        .nav-logout:hover { background: rgba(255,255,255,0.25); }
+        .nav-login { color: rgba(250, 249, 247, 0.8); }
+        .nav-login:hover { color: var(--color-bg); }
+    </style>
 </head>
 <body>
     <div class="noise-overlay"></div>
@@ -15,9 +68,14 @@
     <nav class="nav">
         <a href="#" class="nav-logo">NvO</a>
         <div class="nav-links">
-            <a href="#projects">Projects</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+            <a href="#projects" class="auth-required">Projects</a>
+            <a href="#about" class="auth-required">About</a>
+            <a href="#contact" class="auth-required">Contact</a>
+            <div class="nav-auth">
+                <span id="navUser" class="nav-user auth-required"></span>
+                <a href="#" id="navLogout" class="nav-logout auth-required">Logout</a>
+                <a href="login.html" id="navLogin" class="nav-login">Login</a>
+            </div>
         </div>
     </nav>
 
@@ -32,8 +90,14 @@
             <p class="hero-subtitle">
                 Crafting clean, efficient solutions for real-world problems. Passionate about building software that makes a difference.
             </p>
-            <a href="#projects" class="hero-cta">
+            <a href="#projects" class="hero-cta auth-required">
                 <span>View Projects</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+            </a>
+            <a href="login.html" class="hero-cta" id="heroCta">
+                <span>Login to View Projects</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M7 17L17 7M17 7H7M17 7V17"/>
                 </svg>
@@ -45,12 +109,22 @@
         </div>
     </header>
 
-    <section id="projects" class="projects">
+    <section id="loginPrompt" class="login-prompt">
+        <h2 class="login-prompt-title">Want to see more?</h2>
+        <p class="login-prompt-text">Sign in to view my projects, learn about my background, and get in touch.</p>
+        <a href="login.html" class="login-prompt-btn">
+            <span>Sign In</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+            </svg>
+        </a>
+    </section>
+
+    <section id="projects" class="projects auth-required">
         <div class="section-header">
             <span class="section-number">01</span>
             <h2 class="section-title">Selected Work</h2>
         </div>
-        
         <div class="projects-grid">
             <a href="projects/project-1.html" class="project-card">
                 <div class="project-image">
@@ -65,11 +139,10 @@
                 <div class="project-info">
                     <span class="project-category">React / Node.js</span>
                     <h3 class="project-title">Project One</h3>
-                    <p class="project-desc">A brief description of your first project. Explain what it does and what technologies you used.</p>
+                    <p class="project-desc">A brief description of your first project.</p>
                 </div>
                 <div class="project-arrow">→</div>
             </a>
-
             <a href="projects/project-2.html" class="project-card">
                 <div class="project-image">
                     <div class="project-placeholder">
@@ -83,11 +156,10 @@
                 <div class="project-info">
                     <span class="project-category">Python / Flask</span>
                     <h3 class="project-title">Project Two</h3>
-                    <p class="project-desc">A brief description of your second project. Explain what it does and what technologies you used.</p>
+                    <p class="project-desc">A brief description of your second project.</p>
                 </div>
                 <div class="project-arrow">→</div>
             </a>
-
             <a href="projects/project-3.html" class="project-card">
                 <div class="project-image">
                     <div class="project-placeholder">
@@ -99,11 +171,10 @@
                 <div class="project-info">
                     <span class="project-category">TypeScript / D3.js</span>
                     <h3 class="project-title">Project Three</h3>
-                    <p class="project-desc">A brief description of your third project. Explain what it does and what technologies you used.</p>
+                    <p class="project-desc">A brief description of your third project.</p>
                 </div>
                 <div class="project-arrow">→</div>
             </a>
-
             <a href="projects/project-4.html" class="project-card">
                 <div class="project-image">
                     <div class="project-placeholder">
@@ -117,94 +188,91 @@
                 <div class="project-info">
                     <span class="project-category">Go / PostgreSQL</span>
                     <h3 class="project-title">Project Four</h3>
-                    <p class="project-desc">A brief description of your fourth project. Explain what it does and what technologies you used.</p>
+                    <p class="project-desc">A brief description of your fourth project.</p>
                 </div>
                 <div class="project-arrow">→</div>
             </a>
         </div>
     </section>
 
-    <section id="about" class="about">
+    <section id="about" class="about auth-required">
         <div class="section-header">
             <span class="section-number">02</span>
             <h2 class="section-title">About</h2>
         </div>
-        
         <div class="about-content">
             <div class="about-text">
-                <p class="about-lead">
-                    Software developer passionate about building things that work beautifully.
-                </p>
-                <p>
-                    I love turning complex problems into simple, elegant solutions. Whether it's a web application, API, or automation tool, I focus on writing clean, maintainable code that stands the test of time.
-                </p>
-                <p>
-                    When I'm not coding, you'll find me exploring new technologies, contributing to open source, or working on side projects that scratch a creative itch.
-                </p>
+                <p class="about-lead">Software developer passionate about building things that work beautifully.</p>
+                <p>I love turning complex problems into simple, elegant solutions. Whether it's a web application, API, or automation tool, I focus on writing clean, maintainable code.</p>
+                <p>When I'm not coding, you'll find me exploring new technologies, contributing to open source, or working on side projects.</p>
             </div>
             <div class="about-skills">
                 <div class="skill-group">
                     <h4>Languages</h4>
-                    <ul>
-                        <li>Python</li>
-                        <li>TypeScript</li>
-                        <li>JavaScript</li>
-                        <li>Go</li>
-                    </ul>
+                    <ul><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>Go</li></ul>
                 </div>
                 <div class="skill-group">
                     <h4>Frameworks</h4>
-                    <ul>
-                        <li>React</li>
-                        <li>Next.js</li>
-                        <li>Node.js</li>
-                        <li>FastAPI</li>
-                    </ul>
+                    <ul><li>React</li><li>Next.js</li><li>Node.js</li><li>FastAPI</li></ul>
                 </div>
                 <div class="skill-group">
                     <h4>Tools</h4>
-                    <ul>
-                        <li>Git</li>
-                        <li>Docker</li>
-                        <li>PostgreSQL</li>
-                        <li>AWS</li>
-                    </ul>
+                    <ul><li>Git</li><li>Docker</li><li>PostgreSQL</li><li>AWS</li></ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section id="contact" class="contact auth-required">
         <div class="contact-content">
             <h2 class="contact-title">Let's build something</h2>
             <p class="contact-subtitle">Open for collaboration and new opportunities.</p>
             <div class="contact-links">
-                <a href="mailto:hello@example.com" class="contact-link">
-                    <span>Email</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                    </svg>
-                </a>
-                <a href="https://github.com" target="_blank" class="contact-link">
-                    <span>GitHub</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                    </svg>
-                </a>
-                <a href="https://linkedin.com" target="_blank" class="contact-link">
-                    <span>LinkedIn</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                    </svg>
-                </a>
+                <a href="mailto:hello@example.com" class="contact-link"><span>Email</span></a>
+                <a href="https://github.com" target="_blank" class="contact-link"><span>GitHub</span></a>
+                <a href="https://linkedin.com" target="_blank" class="contact-link"><span>LinkedIn</span></a>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
+    <footer class="footer auth-required">
         <p>© 2026 Nikki van Ommeren</p>
     </footer>
 
     <script src="script.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { firebaseConfig } from "./firebase-config.js";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            const authElements = document.querySelectorAll('.auth-required');
+            const loginPrompt = document.getElementById('loginPrompt');
+            const navLogin = document.getElementById('navLogin');
+            const navUser = document.getElementById('navUser');
+            const heroCta = document.getElementById('heroCta');
+
+            if (user) {
+                authElements.forEach(el => el.classList.add('visible'));
+                loginPrompt.classList.add('hidden');
+                navLogin.style.display = 'none';
+                navUser.textContent = user.email.split('@')[0];
+                heroCta.style.display = 'none';
+            } else {
+                authElements.forEach(el => el.classList.remove('visible'));
+                loginPrompt.classList.remove('hidden');
+                navLogin.style.display = 'block';
+                heroCta.style.display = 'inline-flex';
+            }
+        });
+
+        document.getElementById('navLogout').addEventListener('click', (e) => {
+            e.preventDefault();
+            signOut(auth);
+        });
+    </script>
 </body>
 </html>
