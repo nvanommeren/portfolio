@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Name | Nikki van Ommeren</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Project Page Specific Styles */
+        .project-hero {
+            padding: calc(var(--space-xl) + 60px) var(--space-md) var(--space-lg);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .project-hero-content {
+            max-width: 900px;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-md);
+            transition: color var(--transition-fast);
+        }
+        
+        .back-link:hover {
+            color: var(--color-accent);
+        }
+        
+        .project-hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .project-meta {
+            display: flex;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .meta-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+        }
+        
+        .meta-value {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+        
+        .project-content {
+            padding: var(--space-lg) var(--space-md);
+            max-width: 900px;
+        }
+        
+        .project-content h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 400;
+            margin: var(--space-lg) 0 var(--space-sm);
+        }
+        
+        .project-content h2:first-child {
+            margin-top: 0;
+        }
+        
+        .project-content p {
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .project-content ul {
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-sm);
+            padding-left: var(--space-md);
+        }
+        
+        .project-content li {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .code-block {
+            background: var(--color-text);
+            color: var(--color-bg);
+            padding: var(--space-md);
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin: var(--space-md) 0;
+        }
+        
+        .project-image-full {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-border) 100%);
+            border-radius: 4px;
+            margin: var(--space-md) 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-muted);
+        }
+        
+        .cta-section {
+            padding: var(--space-lg) var(--space-md);
+            background: var(--color-bg-alt);
+            text-align: center;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-md);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 2px;
+            transition: all var(--transition-fast);
+        }
+        
+        .btn-primary {
+            background: var(--color-text);
+            color: var(--color-bg);
+        }
+        
+        .btn-primary:hover {
+            background: var(--color-accent);
+        }
+        
+        .btn-secondary {
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <nav class="nav">
+        <a href="../index.html" class="nav-logo">NvO</a>
+        <div class="nav-links">
+            <a href="../index.html#projects">Projects</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="project-hero-content">
+            <a href="../index.html#projects" class="back-link">
+                ← Back to Projects
+            </a>
+            <h1 class="project-hero-title">Project Name</h1>
+            <p class="hero-subtitle">
+                A brief one-line description of what this project does and why it matters.
+            </p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Stack</span>
+                    <span class="meta-value">React, Node.js, PostgreSQL</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Year</span>
+                    <span class="meta-value">2025</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Full-stack Development</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-content">
+        <h2>Overview</h2>
+        <p>
+            Write a paragraph explaining what this project is about. What problem does it solve? Who is it for? Give readers a quick understanding of the project's purpose and value.
+        </p>
+        
+        <div class="project-image-full">
+            <span>Screenshot or Demo GIF</span>
+        </div>
+        
+        <h2>The Problem</h2>
+        <p>
+            Describe the problem or challenge that motivated this project. What pain points were you addressing? Why did existing solutions fall short?
+        </p>
+        
+        <h2>The Solution</h2>
+        <p>
+            Explain your approach to solving the problem. What key features did you build? How does the solution work?
+        </p>
+        <ul>
+            <li>Feature one with brief explanation</li>
+            <li>Feature two with brief explanation</li>
+            <li>Feature three with brief explanation</li>
+            <li>Feature four with brief explanation</li>
+        </ul>
+        
+        <h2>Technical Highlights</h2>
+        <div class="code-block">
+<pre>// Example code snippet showcasing an interesting
+// technical aspect of your project
+
+function exampleFunction(data) {
+    // Your code here
+    return processedData;
+}</pre>
+        </div>
+        
+        <h2>Results</h2>
+        <p>
+            Share the outcomes of the project. Did it improve performance? Save time? Get adopted by users? Include metrics if you have them.
+        </p>
+    </main>
+
+    <section class="cta-section">
+        <div class="cta-buttons">
+            <a href="https://github.com" target="_blank" class="btn btn-primary">
+                <span>View on GitHub</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+            </a>
+            <a href="#" class="btn btn-secondary">
+                <span>Live Demo</span>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 Nikki van Ommeren</p>
+    </footer>
+</body>
+</html>
